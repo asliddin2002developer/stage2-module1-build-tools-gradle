@@ -31,13 +31,12 @@ publishing {
 
 jar {
     manifest {
-        //provide manifest with such attributes as 'Implementation-Title', 'Implementation-Version'
+
+        attributes 'Main-Class': 'com.epam.demo.Utils.java'
+
     }
 }
 
-test {
-    useJUnitPlatform()
-}
 
 publishMavenPublicationToMavenLocal {}.mustRunAfter('build')
 
@@ -46,8 +45,5 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.10' // automatic module
 }
 
-test {
-    useJUnitPlatform()
-}
 
 compileJava {}.dependsOn(':utils:publishToMavenLocal')
