@@ -1,4 +1,50 @@
-//add everything here
+
+
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+java {
+    sourceCompatibility = 1.8
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            group 'org.example'
+            version '1.0-SNAPSHOT'
+
+// provide version
+
+            from components.java
+        }
+    }
+}
+
+//add Apache Apache Commons Lang 3.10 (or higher) dependency
+
+jar {
+    manifest {
+        //provide manifest with such attributes as 'Implementation-Title', 'Implementation-Version'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+publishMavenPublicationToMavenLocal {}.mustRunAfter('build')
+
+
+dependencies {
+    implementation 'org.apache.commons:commons-lang3:3.10' // automatic module
+}
 
 test {
     useJUnitPlatform()
