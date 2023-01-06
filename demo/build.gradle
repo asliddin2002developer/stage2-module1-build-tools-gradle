@@ -1,49 +1,24 @@
-
-
+//add everything here
 plugins {
+    // Apply the java Plugin to add support for Java.
     id 'java'
-    id 'maven-publish'
+    id 'application'
 }
 
-java {
-    sourceCompatibility = 1.8
-}
+dependencies {
 
+    //point to the local subproject
+    implementation project(':utils')
+
+}
 
 repositories {
+// provide repository, where required dependencies are located
     mavenCentral()
 }
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            group 'org.example'
-            version '1.0-SNAPSHOT'
-
-// provide version
-
-            from components.java
-        }
-    }
+test {
+    useJUnitPlatform()
 }
-
-//add Apache Apache Commons Lang 3.10 (or higher) dependency
-
-jar {
-    manifest {
-
-        attributes 'Main-Class': 'com.epam.demo.Utils.java'
-
-    }
-}
-
-
-publishMavenPublicationToMavenLocal {}.mustRunAfter('build')
-
-
-dependencies {
-    implementation 'org.apache.commons:commons-lang3:3.10' // automatic module
-}
-
 
 compileJava {}.dependsOn(':utils:publishToMavenLocal')
